@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MathWiz</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="mathwiz">MathWiz!</string>
+    <string name="play_button">Play</string>
+    <string name="settings_button">Settings</string>
+    <string name="highscores_button">High Scores</string>
+</resources>
