@@ -34,35 +34,47 @@
             android:orientation="vertical"
             tools:ignore="UselessParent">
 
-            <ImageButton
-                android:id="@+id/play_button"
+            <Button
+                android:id="@+id/playButton"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:padding="12dp"
-                app:srcCompat="@drawable/play" />
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
+                android:text="@string/play"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:textSize="50sp" />
 
-            <ImageButton
-                android:id="@+id/settings_button"
+            <Button
+                android:id="@+id/settingsButton"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:padding="12dp"
-                app:srcCompat="@drawable/settings" />
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
+                android:text="@string/settings"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:textSize="50sp" />
 
-            <ImageButton
-                android:id="@+id/high_scores_button"
+            <Button
+                android:id="@+id/highScoreButton"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:padding="12dp"
-                app:srcCompat="@drawable/high_scores" />
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
+                android:text="@string/high_scores"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:textSize="50sp" />
 
         </LinearLayout>
     </FrameLayout>
