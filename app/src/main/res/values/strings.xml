@@ -14,4 +14,6 @@
     <string name="easy">Easy</string>
     <string name="medium">Medium</string>
     <string name="hard">Hard</string>
+    <string name="tip">Tip: Shake the phone to skip the question</string>
+    <string name="times_up">Times Up!</string>
 </resources>

@@ -21,7 +21,7 @@
     </style>
 
     <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
-        <item name="android:background">@color/black_overlay</item>
+        <item name="android:background">@color/colorBlackOverlay</item>
     </style>
     
     <style name="BaseFont" parent="android:style/TextAppearance.Medium">
@@ -30,7 +30,7 @@
     </style>
 
     <style name="MainFont" parent="BaseFont">
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">35sp</item>
     </style>
 
     <style name="TitleFont" parent="BaseFont">
@@ -39,6 +39,11 @@
 
     <style name="LargeFont" parent="BaseFont">
         <item name="android:textSize">55sp</item>
+    </style>
+
+    <style name="TipFont" parent="BaseFont">
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">@color/colorHighlight</item>
     </style>
 
 </resources>

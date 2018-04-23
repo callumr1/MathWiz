@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:background="@color/black_overlay">
+        android:background="@color/colorBlackOverlay">
 
         <TextView
             android:id="@+id/timeText"
@@ -47,6 +47,14 @@
             android:textColor="@color/colorAccent" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tipText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TipFont"
+        android:text="@string/tip"
+        android:textAlignment="center" />
 
     <LinearLayout
         android:layout_width="match_parent"

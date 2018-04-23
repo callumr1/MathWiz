@@ -1,6 +1,7 @@
 package com.example.mathwiz;
 
 import android.app.Activity;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,54 +13,83 @@ import java.util.Random;
 
 public class GameActivity extends Activity implements View.OnClickListener {
 
+    // variables used in this activity
     private int num1;
     private int num2;
-    private String question;
     private int gameDifficulty = 0;
-    private String symbol;
     private int scoreMultiplier;
-    private TextView questionText;
+    private int answer;
+    private int score = 0;
+    private int correctPoints = 10;
+    private int incorrectPoints = 2;
+    private int timerLength = 60000;
+    private String question;
+    private String symbol;
+    private String correctButton;
+
+    // interactable elements in this activity
     private Button answerButton1;
     private Button answerButton2;
     private Button answerButton3;
     private Button answerButton4;
-    private int answer;
-    private String correctButton;
+    private TextView questionText;
+    private TextView scoreText;
+    private TextView timerText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        // initialise elements in this activity
         questionText = findViewById(R.id.questionText);
         answerButton1 = findViewById(R.id.answerButton1);
         answerButton2 = findViewById(R.id.answerButton2);
         answerButton3 = findViewById(R.id.answerButton3);
         answerButton4 = findViewById(R.id.answerButton4);
+        scoreText = findViewById(R.id.scoreText);
+        timerText = findViewById(R.id.timeText);
 
+        // set on click listeners for this activity
         answerButton1.setOnClickListener(this);
         answerButton2.setOnClickListener(this);
         answerButton3.setOnClickListener(this);
         answerButton4.setOnClickListener(this);
 
-        if(gameDifficulty == 0){
+        // sets the scoreMultiplier based on the gameDifficulty
+        if (gameDifficulty == 0) {
             // if the game mode is Easy only allows addition questions
             symbol = "+";
             scoreMultiplier = 1;
-        }
-        else if(gameDifficulty == 1){
+        } else if (gameDifficulty == 1) {
             // if the game mode is Medium only allows multiplication questions
             symbol = "x";
             scoreMultiplier = 2;
-        }
-        else if (gameDifficulty == 2){
+        } else if (gameDifficulty == 2) {
             // if the game mode is Hard only allows division questions
             symbol = "/";
             scoreMultiplier = 3;
         }
 
         setQuestion();
-        setAnswerButtons();
+
+        new CountDownTimer(timerLength, 1000) {
+
+            public void onTick(long millisUntilFinised) {
+                timerText.setText(String.valueOf(millisUntilFinised / 1000));
+            }
+
+            @Override
+            public void onFinish() {
+                questionText.setText(R.string.times_up);
+
+                // disables all of the answer buttons
+                answerButton1.setEnabled(false);
+                answerButton2.setEnabled(false);
+                answerButton3.setEnabled(false);
+                answerButton4.setEnabled(false);
+            }
+        }.start();
     }
 
     private void setQuestion() {
@@ -83,6 +113,9 @@ public class GameActivity extends Activity implements View.OnClickListener {
         // sets the question and displays it
         question = String.valueOf(num1) + symbol + String.valueOf(num2);
         questionText.setText(question);
+
+        // sets the answers that the buttons display when the question is changed/set
+        setAnswerButtons();
     }
 
     private void setAnswerButtons(){
@@ -147,44 +180,72 @@ public class GameActivity extends Activity implements View.OnClickListener {
                 // if the button is the correct answer then give the user points and get a new question
                 Toast toast = Toast.makeText(this, "Correct", Toast.LENGTH_SHORT);
                 toast.show();
+                increaseScore(correctPoints);
             }
             else {
+                // if the button is not the answer, take away points from the user
                 Toast toast = Toast.makeText(this, "Incorrect", Toast.LENGTH_SHORT);
                 toast.show();
+                decreaseScore(incorrectPoints);
             }
+            setQuestion();
         }
         else if(v.getId() == R.id.answerButton2){
             if(correctButton.equals(String.valueOf(answerButton2.getId()))){
                 // if the button is the correct answer then give the user points and get a new question
                 Toast toast = Toast.makeText(this, "Correct", Toast.LENGTH_SHORT);
                 toast.show();
+                increaseScore(correctPoints);
             }
             else {
+                // if the button is not the answer, take away points from the user
                 Toast toast = Toast.makeText(this, "Incorrect", Toast.LENGTH_SHORT);
                 toast.show();
+                decreaseScore(incorrectPoints);
             }
+            setQuestion();
         }
         else if(v.getId() == R.id.answerButton3){
             if(correctButton.equals(String.valueOf(answerButton3.getId()))){
                 // if the button is the correct answer then give the user points and get a new question
                 Toast toast = Toast.makeText(this, "Correct", Toast.LENGTH_SHORT);
                 toast.show();
+                increaseScore(correctPoints);
             }
             else {
+                // if the button is not the answer, take away points from the user
                 Toast toast = Toast.makeText(this, "Incorrect", Toast.LENGTH_SHORT);
                 toast.show();
+                decreaseScore(incorrectPoints);
             }
+            setQuestion();
         }
         else if(v.getId() == R.id.answerButton4){
             if(correctButton.equals(String.valueOf(answerButton4.getId()))){
                 // if the button is the correct answer then give the user points and get a new question
                 Toast toast = Toast.makeText(this, "Correct", Toast.LENGTH_SHORT);
                 toast.show();
+                increaseScore(correctPoints);
             }
             else {
+                // if the button is not the answer, take away points from the user
                 Toast toast = Toast.makeText(this, "Incorrect", Toast.LENGTH_SHORT);
                 toast.show();
+                decreaseScore(incorrectPoints);
             }
+            setQuestion();
         }
+    }
+
+    private void increaseScore(int points){
+        // increases the players score based on the difficulty that they are playing
+        score += (points * scoreMultiplier);
+        scoreText.setText(String.valueOf(score));
+    }
+
+    private void decreaseScore(int points){
+        // decreases the players score when they pick the wrong answer
+        score -= points;
+        scoreText.setText(String.valueOf(score));
     }
 }
