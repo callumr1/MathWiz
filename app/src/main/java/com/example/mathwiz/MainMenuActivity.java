@@ -80,9 +80,9 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         }
     };
 
-    private ImageButton settingsButton;
-    private ImageButton playButton;
-    private ImageButton highScoreButton;
+    private Button settingsButton;
+    private Button playButton;
+    private Button highScoreButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,9 +107,9 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
 
-        playButton = findViewById(R.id.play_button);
-        settingsButton = findViewById(R.id.settings_button);
-        highScoreButton = findViewById(R.id.high_scores_button);
+        playButton = findViewById(R.id.playButton);
+        settingsButton = findViewById(R.id.settingsButton);
+        highScoreButton = findViewById(R.id.highScoreButton);
 
         playButton.setOnClickListener(this);
         settingsButton.setOnClickListener(this);
@@ -173,18 +173,17 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         // changes to the game activity
-        if (view.getId() == R.id.play_button){
+        if (view.getId() == R.id.playButton){
             Intent intent = new Intent(this, GameActivity.class);
             startActivity(intent);
         }
-
         // changes to the settings activity
-        if (view.getId() == R.id.settings_button){
+        if (view.getId() == R.id.settingsButton){
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         }
         // changes to the high scores activity
-        if (view.getId() == R.id.high_scores_button){
+        if (view.getId() == R.id.highScoreButton){
             Intent intent = new Intent(this, HighScoreActivity.class);
             startActivity(intent);
         }

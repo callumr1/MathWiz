@@ -19,5 +19,22 @@
     <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
         <item name="android:background">@color/black_overlay</item>
     </style>
+    
+    <style name="BaseFont" parent="android:style/TextAppearance.Medium">
+        <item name="android:fontFamily">@font/main_font</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="MainFont" parent="BaseFont">
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="TitleFont" parent="BaseFont">
+        <item name="android:textSize">70sp</item>
+    </style>
+
+    <style name="LargeFont" parent="BaseFont">
+        <item name="android:textSize">55sp</item>
+    </style>
 
 </resources>
