@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".GameActivity"
-            android:theme="@android:style/Theme.NoTitleBar"/>
+            android:theme="@style/GameTheme" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".HighScoreActivity"></activity>
     </application>
