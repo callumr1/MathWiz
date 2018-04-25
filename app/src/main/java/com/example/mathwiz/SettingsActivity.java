@@ -7,7 +7,7 @@ import android.widget.Button;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public String gameDifficulty = "Easy";
+    public int gameDifficulty;
     private Button easyButton;
     private Button mediumButton;
     private Button hardButton;
@@ -24,35 +24,59 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         easyButton.setOnClickListener(this);
         mediumButton.setOnClickListener(this);
         hardButton.setOnClickListener(this);
+
+        setButtonHighlight();
+    }
+
+    private void setButtonHighlight() {
+        if(gameDifficulty == 0){
+            // sets the easy button to the selected button colour
+            easyButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorAccent));
+
+            // sets the other buttons to the non-selected button colour
+            mediumButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorAccentDark));
+            hardButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorAccentDark));
+        }
+        if(gameDifficulty == 1){
+            // sets the easy button to the selected button colour
+            mediumButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorAccent));
+
+            // sets the other buttons to the non-selected button colour
+            easyButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorAccentDark));
+            hardButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorAccentDark));
+        }
+        if(gameDifficulty == 2){
+            // sets the easy button to the selected button colour
+            hardButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorAccent));
+
+            // sets the other buttons to the non-selected button colour
+            easyButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorAccentDark));
+            mediumButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorAccentDark));
+        }
     }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.easyButton){
             // sets the game difficulty to easy
-            gameDifficulty = "Easy";
-            // sets the easy button to the selected button colour
-            easyButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorAccent));
-            // sets the other buttons to the non-selected button colour
-            mediumButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorAccentDark));
-            hardButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorAccentDark));
+            gameDifficulty = 0;
+            GameActivity.setGameDifficulty(gameDifficulty);
+            // sets the highlights for each button
+            setButtonHighlight();
         }
         if (v.getId() == R.id.medButton){
             // sets the game difficulty to medium
-            gameDifficulty = "Medium";
-            // sets the easy button to the selected button colour
-            mediumButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorAccent));
-            // sets the other buttons to the non-selected button colour
-            easyButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorAccentDark));
-            hardButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorAccentDark));
+            gameDifficulty = 1;
+            GameActivity.setGameDifficulty(gameDifficulty);
+            // sets the highlights for each button
+            setButtonHighlight();
         }
         if (v.getId() == R.id.hardButton){
             // sets the game difficulty to hard
-            gameDifficulty = "Hard";
-            hardButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorAccent));
-            // sets the other buttons to the non-selected button colour
-            easyButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorAccentDark));
-            mediumButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorAccentDark));
+            gameDifficulty = 2;
+            GameActivity.setGameDifficulty(gameDifficulty);
+            // sets the highlights for each button
+            setButtonHighlight();
         }
     }
 }

@@ -20,8 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GameActivity"
-            android:theme="@style/GameTheme" />
+        <activity android:name=".GameActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".HighScoreActivity"></activity>
     </application>

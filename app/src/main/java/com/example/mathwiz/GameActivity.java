@@ -16,7 +16,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
     // variables used in this activity
     private int num1;
     private int num2;
-    private int gameDifficulty = 0;
+    private static int gameDifficulty = 0;
     private int scoreMultiplier;
     private int answer;
     private int score = 0;
@@ -59,15 +59,15 @@ public class GameActivity extends Activity implements View.OnClickListener {
         // sets the scoreMultiplier based on the gameDifficulty
         if (gameDifficulty == 0) {
             // if the game mode is Easy only allows addition questions
-            symbol = "+";
+            symbol = " + ";
             scoreMultiplier = 1;
         } else if (gameDifficulty == 1) {
             // if the game mode is Medium only allows multiplication questions
-            symbol = "x";
+            symbol = " x ";
             scoreMultiplier = 2;
         } else if (gameDifficulty == 2) {
             // if the game mode is Hard only allows division questions
-            symbol = "/";
+            symbol = " x ";
             scoreMultiplier = 3;
         }
 
@@ -96,18 +96,22 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
         // sets the two numbers that will be used in the question
         Random random = new Random();
-        num1 = random.nextInt(50);
-        num2 = random.nextInt(10);
 
         // calculates the answer based on the gameDifficulty
         if (gameDifficulty == 0){
+            num1 = random.nextInt(50);
+            num2 = random.nextInt(10);
             answer = num1 + num2;
         }
         else if (gameDifficulty == 1){
+            num1 = random.nextInt(10);
+            num2 = random.nextInt(10);
             answer = num1 * num2;
         }
         else if (gameDifficulty == 2){
-            answer = num1 / num2;
+            num1 = random.nextInt(50);
+            num2 = random.nextInt(10);
+            answer = num1 * num2;
         }
 
         // sets the question and displays it
@@ -124,15 +128,14 @@ public class GameActivity extends Activity implements View.OnClickListener {
             Random random = new Random();
             int n = random.nextInt(3);
             // creates random false answers
-            int n1 = random.nextInt(answer * 2);
-            int n2 = random.nextInt(answer * 2);
-            int n3 = random.nextInt(answer * 2);
+            int n1 = answer + ((1 + num2) * 2);
+            int n2 = answer + (1 + num1);
+            int n3 = answer - (1 + num2);
 
             if (n1 == n || n2 == n || n3 == n){
                 n1 += 1;
                 n2 += 1;
                 n3 += 1;
-                System.out.println("Same number");
             }
 
             if (n == 0) {
@@ -247,5 +250,9 @@ public class GameActivity extends Activity implements View.OnClickListener {
         // decreases the players score when they pick the wrong answer
         score -= points;
         scoreText.setText(String.valueOf(score));
+    }
+
+    public static void setGameDifficulty(int difficulty){
+        gameDifficulty = difficulty;
     }
 }
