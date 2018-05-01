@@ -1,6 +1,7 @@
 package com.example.mathwiz;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
     private int scoreMultiplier;
     private int answer;
     private int score = 0;
+    private int finalScore;
     private int correctPoints = 10;
     private int incorrectPoints = 2;
     private int timerLength = 60000;
@@ -84,10 +86,15 @@ public class GameActivity extends Activity implements View.OnClickListener {
                 questionText.setText(R.string.times_up);
 
                 // disables all of the answer buttons
-                answerButton1.setEnabled(false);
-                answerButton2.setEnabled(false);
-                answerButton3.setEnabled(false);
-                answerButton4.setEnabled(false);
+                answerButton1.setVisibility(View.GONE);
+                answerButton2.setVisibility(View.GONE);
+                answerButton3.setVisibility(View.GONE);
+                answerButton4.setVisibility(View.GONE);
+                setFinalScore(score);
+
+                // go to the GameOverActivity
+                startGameOverActivity();
+
             }
         }.start();
     }
@@ -254,5 +261,15 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
     public static void setGameDifficulty(int difficulty){
         gameDifficulty = difficulty;
+    }
+
+    public void setFinalScore(int score){
+        finalScore = score;
+    }
+
+    private void startGameOverActivity() {
+        Intent intent = new Intent(this, GameOverActivity.class);
+        intent.putExtra("final score", finalScore);
+        startActivity(intent);
     }
 }

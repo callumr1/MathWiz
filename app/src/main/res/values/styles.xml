@@ -46,4 +46,9 @@
         <item name="android:textColor">@color/colorHighlight</item>
     </style>
 
+    <style name="HighlightFont" parent="BaseFont">
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">@color/colorAccentDark</item>
+    </style>
+
 </resources>

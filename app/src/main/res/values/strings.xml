@@ -16,4 +16,9 @@
     <string name="hard">Hard</string>
     <string name="tip">Tip: Shake the phone to skip the question</string>
     <string name="times_up">Times Up!</string>
+    <string name="game_over">Game Over!</string>
+    <string name="you_scored">You Scored:</string>
+    <string name="post_score_to_twitter">Post Score to Twitter</string>
+    <string name="play_again">Play Again!</string>
+    <string name="home">Home</string>
 </resources>
