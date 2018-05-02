@@ -7,7 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import twitter4j.Query;
+import twitter4j.QueryResult;
+import twitter4j.Status;
 import twitter4j.Twitter;
+import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
 
@@ -50,6 +54,21 @@ public class GameOverActivity extends AppCompatActivity {
                     String secret = data.getStringExtra("access token secret");
                     AccessToken accessToken = new AccessToken(token, secret);
                     twitter.setOAuthAccessToken(accessToken);
+
+                    Query query = new Query("@twitterapi");
+                    QueryResult result = null;
+                    try {
+                        twitter.updateStatus("I just scored " + scoreText + " points in MathWiz!");
+                        result = twitter.search(query);
+
+                    } catch (final TwitterException e) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                e.printStackTrace();
+                            }
+                        });
+                    }
                 }
             });
         }

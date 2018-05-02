@@ -83,6 +83,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     private Button settingsButton;
     private Button playButton;
     private Button highScoreButton;
+    private Button twitterButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,12 +111,12 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         playButton = findViewById(R.id.playButton);
         settingsButton = findViewById(R.id.settingsButton);
         highScoreButton = findViewById(R.id.highScoreButton);
+        twitterButton = findViewById(R.id.twitterButton);
 
         playButton.setOnClickListener(this);
         settingsButton.setOnClickListener(this);
         highScoreButton.setOnClickListener(this);
-
-
+        twitterButton.setOnClickListener(this);
     }
 
     @Override
@@ -178,13 +179,18 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
             startActivity(intent);
         }
         // changes to the settings activity
-        if (view.getId() == R.id.settingsButton){
+        else if (view.getId() == R.id.settingsButton){
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         }
         // changes to the high scores activity
-        if (view.getId() == R.id.highScoreButton){
+        else if (view.getId() == R.id.highScoreButton){
             Intent intent = new Intent(this, HighScoreActivity.class);
+            startActivity(intent);
+        }
+        else if (view.getId() == R.id.twitterButton){
+            Intent intent = new Intent(this, GameOverActivity.class);
+            intent.putExtra("final score", 0);
             startActivity(intent);
         }
     }

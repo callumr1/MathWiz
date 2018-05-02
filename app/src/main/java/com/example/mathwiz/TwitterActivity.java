@@ -1,5 +1,6 @@
 package com.example.mathwiz;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
+import twitter4j.auth.RequestToken;
 
 public class TwitterActivity extends AppCompatActivity {
 
@@ -29,7 +31,8 @@ public class TwitterActivity extends AppCompatActivity {
                 System.out.println(url);
                 if(url.startsWith("http://mathwiz.com")){
                     Uri uri = Uri.parse(url);
-                    final String oauthVerifier = uri.getQueryParameter("oath_verifier");
+                    final String oauthVerifier = uri.getQueryParameter("oauth_verifier");
+                    System.out.println("oauthVerifier: " + oauthVerifier);
                     if(oauthVerifier != null){
                         System.out.println("authenticated!");
                         Background.run(new Runnable() {
@@ -39,11 +42,13 @@ public class TwitterActivity extends AppCompatActivity {
                                     AccessToken accessToken = twitter.getOAuthAccessToken(oauthVerifier);
                                     twitter.setOAuthAccessToken(accessToken);
 
-                                    Intent intent = new Intent();
-                                    intent.putExtra("access token", accessToken.getToken());
-                                    intent.putExtra("access token secret", accessToken.getTokenSecret());
+                                    Intent returnIntent = new Intent();
+                                    returnIntent.putExtra("access token", accessToken.getToken());
+                                    returnIntent.putExtra("access token secret", accessToken.getTokenSecret());
+                                    System.out.println(accessToken.getToken());
+                                    System.out.println(accessToken.getTokenSecret());
 
-                                    setResult(RESULT_OK, intent);
+                                    setResult(Activity.RESULT_OK, returnIntent);
                                     finish();
                                 } catch (TwitterException e) {
                                     System.out.println(e.toString());
@@ -52,7 +57,33 @@ public class TwitterActivity extends AppCompatActivity {
                         });
                     }
                 }
+                super.onLoadResource(view, url);
             }
         });
+
+        Background.run(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    RequestToken requestToken = twitter.getOAuthRequestToken();
+                    final String requestUrl = requestToken.getAuthenticationURL();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            webView.loadUrl(requestUrl);
+                        }
+                    });
+                } catch (TwitterException e) {
+                    System.out.println(e.toString());
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed(){
+        setResult(RESULT_CANCELED);
+        finish();
+        super.onBackPressed();
     }
 }
