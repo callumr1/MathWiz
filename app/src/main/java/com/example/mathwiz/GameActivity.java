@@ -2,8 +2,12 @@ package com.example.mathwiz;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -26,11 +30,13 @@ public class GameActivity extends Activity implements View.OnClickListener {
     private final int INCORRECT = 1;
     private int backgroundMusic, correctSound, incorrectSound;
     private boolean soundsLoaded = false;
+    private static boolean playBackgroundMusic = true, playSoundEffects = true;
 
     // interactable elements in this activity
     private Button answerButton1, answerButton2, answerButton3, answerButton4;
     private TextView questionText, scoreText, timerText;
     private SoundManager soundManager;
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,77 +76,69 @@ public class GameActivity extends Activity implements View.OnClickListener {
         // Generates random numbers to create the question
         setQuestion();
 
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // Timer that starts at the start of the game, when it finishes, goes to the GameOverActivity
+                new CountDownTimer(timerLength, 1000) {
+
+                    public void onTick(long millisUntilFinised) {
+                        timerText.setText(String.valueOf(millisUntilFinised / 1000));
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        questionText.setText(R.string.times_up);
+
+                        // disables all of the answer buttons
+                        answerButton1.setVisibility(View.GONE);
+                        answerButton2.setVisibility(View.GONE);
+                        answerButton3.setVisibility(View.GONE);
+                        answerButton4.setVisibility(View.GONE);
+                        setFinalScore(score);
+
+                        // go to the GameOverActivity
+                        startGameOverActivity();
+
+                    }
+                }.start();
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Continue playing the background music
         Background.run(new Runnable() {
             @Override
             public void run() {
+                Looper.prepare();
 
-                soundManager = new SoundManager(GameActivity.this);
-                backgroundMusic = soundManager.addSound(R.raw.background_music);
-                correctSound = soundManager.addSound(R.raw.correct);
-                incorrectSound = soundManager.addSound(R.raw.incorrect);
+                if(playSoundEffects){
+                    // Prepares the sound effects to be played
+                    soundManager = new SoundManager(GameActivity.this);
+                    correctSound = soundManager.addSound(R.raw.correct);
+                    incorrectSound = soundManager.addSound(R.raw.incorrect);
+                }
 
-                soundManager.play(backgroundMusic, 1);
-
-                /*
-                // Create the sound pool, and load the sound files
-                SoundPool soundPool = createSoundPool();
-                // checks to see if the soundPool has finished loading all of the files
-                soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
-                    @Override
-                    public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-                        System.out.println("Done loading sounds");
-                        soundsLoaded = true;
-                    }
-                });
-                //backgroundMusic = soundPool.load(GameActivity.this, R.raw.background_music, 10);
-                //correctSound = soundPool.load(GameActivity.this, R.raw.correct, 1);
-                //incorrectSound = soundPool.load(GameActivity.this, R.raw.incorrect, 1);
-
-                if(soundsLoaded){
-                    // Plays the background music, and loops it at its normal rate
-                    soundPool.play(backgroundMusic, 1f, 1f, 1, 1, 1f);
-                    System.out.println("Music is playing");
-                }*/
+                // Plays the background music if it has not been disabled in setting
+                if(playBackgroundMusic){
+                    Background.playBackgroundMusic(GameActivity.this);
+                }
             }
         });
-
-        // Timer that starts at the start of the game, when it finishes, goes to the GameOverActivity
-        new CountDownTimer(timerLength, 1000) {
-
-            public void onTick(long millisUntilFinised) {
-                timerText.setText(String.valueOf(millisUntilFinised / 1000));
-            }
-
-            @Override
-            public void onFinish() {
-                questionText.setText(R.string.times_up);
-
-                // disables all of the answer buttons
-                answerButton1.setVisibility(View.GONE);
-                answerButton2.setVisibility(View.GONE);
-                answerButton3.setVisibility(View.GONE);
-                answerButton4.setVisibility(View.GONE);
-                setFinalScore(score);
-
-                // go to the GameOverActivity
-                startGameOverActivity();
-
-            }
-        }.start();
-
     }
 
-    /*private SoundPool createSoundPool() {
-        // Create AudioAttributes and SoundPool to enable background music and sound effects
-        AudioAttributes attributes = new AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_GAME)
-                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                .build();
-        return new SoundPool.Builder()
-                .setAudioAttributes(attributes)
-                .setMaxStreams(MAX_STREAMS)
-                .build();
-    }*/
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if(playBackgroundMusic){
+            // Stop playing the background music
+            Background.stopBackgroundMusic(this);
+        }
+    }
 
     private void setQuestion() {
 
@@ -234,8 +232,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
                 Toast toast = Toast.makeText(this, "Correct", Toast.LENGTH_SHORT);
                 toast.show();
                 increaseScore(correctPoints);
-                // Play the correct sound effect
-                soundManager.play(correctSound, 0);
+                playSoundEffect(correctSound);
             }
             else {
                 // if the button is not the answer, take away points from the user
@@ -243,7 +240,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
                 toast.show();
                 decreaseScore(incorrectPoints);
                 // Play the incorrect sound effect
-                soundManager.play(incorrectSound, 0);
+                playSoundEffect(incorrectSound);
             }
             setQuestion();
         }
@@ -252,13 +249,13 @@ public class GameActivity extends Activity implements View.OnClickListener {
                 // if the button is the correct answer then give the user points and get a new question
                 increaseScore(correctPoints);
                 // Play the correct sound effect
-                soundManager.play(correctSound, 0);
+                playSoundEffect(correctSound);
             }
             else {
                 // if the button is not the answer, take away points from the user
                 decreaseScore(incorrectPoints);
                 // Play the incorrect sound effect
-                soundManager.play(incorrectSound, 0);
+                playSoundEffect(incorrectSound);
             }
             setQuestion();
         }
@@ -267,13 +264,13 @@ public class GameActivity extends Activity implements View.OnClickListener {
                 // if the button is the correct answer then give the user points and get a new question
                 increaseScore(correctPoints);
                 // Play the correct sound effect
-                soundManager.play(correctSound, 0);
+                playSoundEffect(correctSound);
             }
             else {
                 // if the button is not the answer, take away points from the user
                 decreaseScore(incorrectPoints);
                 // Play the incorrect sound effect
-                soundManager.play(incorrectSound, 0);
+                playSoundEffect(incorrectSound);
             }
             setQuestion();
         }
@@ -281,16 +278,22 @@ public class GameActivity extends Activity implements View.OnClickListener {
             if(correctButton.equals(String.valueOf(answerButton4.getId()))){
                 // if the button is the correct answer then give the user points and get a new question
                 increaseScore(correctPoints);
-                // Play the correct sound effect
-                soundManager.play(correctSound, 0);
+                playSoundEffect(correctSound);
             }
             else {
                 // if the button is not the answer, take away points from the user
                 decreaseScore(incorrectPoints);
                 // Play the incorrect sound effect
-                soundManager.play(incorrectSound, 0);
+                playSoundEffect(incorrectSound);
             }
             setQuestion();
+        }
+    }
+
+    private void playSoundEffect(int sound) {
+        if(playSoundEffects) {
+            // Play the correct sound effect
+            soundManager.play(sound, 0);
         }
     }
 
@@ -312,6 +315,14 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
     public void setFinalScore(int score){
         finalScore = score;
+    }
+
+    public static void setPlayBackgroundMusic(boolean play){
+        playBackgroundMusic = play;
+    }
+
+    public static void setPlaySoundEffects(boolean play){
+        playSoundEffects = play;
     }
 
     private void startGameOverActivity() {

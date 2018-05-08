@@ -21,4 +21,7 @@
     <string name="post_score_to_twitter">Post Score to Twitter</string>
     <string name="play_again">Play Again!</string>
     <string name="home">Home</string>
+    <string name="sounds">Sounds</string>
+    <string name="background_music">Background Music</string>
+    <string name="sound_effects">Sound Effects</string>
 </resources>

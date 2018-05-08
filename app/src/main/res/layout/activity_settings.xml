@@ -22,56 +22,136 @@
         android:layout_weight="10"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/difficultyTextView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/LargeFont"
-            android:text="@string/difficulty"
-            android:textAlignment="center" />
+            android:orientation="vertical"
+            android:paddingBottom="10sp">
+
+            <TextView
+                android:id="@+id/difficultyTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LargeFont"
+                android:text="@string/difficulty"
+                android:textAlignment="center" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/easyButton"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/main_font"
+                    android:text="@string/easy"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="30sp" />
+
+                <Button
+                    android:id="@+id/medButton"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:backgroundTint="@color/colorAccentDark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/main_font"
+                    android:text="@string/medium"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="30sp"/>
+
+                <Button
+                    android:id="@+id/hardButton"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:backgroundTint="@color/colorAccentDark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/main_font"
+                    android:text="@string/hard"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="30sp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:paddingBottom="10sp">
 
-            <Button
-                android:id="@+id/easyButton"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/musicTextView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/main_font"
-                android:text="@string/easy"
-                android:textAlignment="center"
-                android:textColor="@android:color/black"
-                android:textSize="30sp" />
+                style="@style/LargeFont"
+                android:text="@string/sounds"
+                android:textAlignment="center" />
 
-            <Button
-                android:id="@+id/medButton"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:backgroundTint="@color/colorAccentDark"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/main_font"
-                android:text="@string/medium"
-                android:textAlignment="center"
-                android:textColor="@android:color/black"
-                android:textSize="30sp"/>
+                android:orientation="horizontal"
+                android:gravity="center">
 
-            <Button
-                android:id="@+id/hardButton"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:backgroundTint="@color/colorAccentDark"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    style="@style/MainFont"
+                    android:text="@string/background_music"
+                    android:textAlignment="center" />
+
+                <ToggleButton
+                    android:id="@+id/musicToggle"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorAccentDark"
+                    android:checked="true"
+                    android:fontFamily="@font/main_font"
+                    android:textColor="@android:color/black"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/main_font"
-                android:text="@string/hard"
-                android:textAlignment="center"
-                android:textColor="@android:color/black"
-                android:textSize="30sp"/>
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    style="@style/MainFont"
+                    android:text="@string/sound_effects"
+                    android:textAlignment="center" />
+
+                <ToggleButton
+                    android:id="@+id/soundEffectsToggle"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorAccentDark"
+                    android:checked="true"
+                    android:fontFamily="@font/main_font"
+                    android:textColor="@android:color/black"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
