@@ -40,12 +40,14 @@ public class GameOverActivity extends AppCompatActivity {
     }
 
     public void authorise(View view){
+        // Runs the TwitterActivity to allow the user to sign into their twitter account
         Intent intent = new Intent(this, TwitterActivity.class);
         startActivityForResult(intent, AUTHENTICATE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, final Intent data){
+        // Handles the twitter authentication response
         if (requestCode == AUTHENTICATE && resultCode == RESULT_OK){
             Background.run(new Runnable() {
                 @Override
