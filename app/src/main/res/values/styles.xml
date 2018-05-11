@@ -17,13 +17,13 @@
     </style>
 
     <style name="GameTheme" parent="AppTheme">
-        <item name = "android:actionBarStyle">@style/Theme.AppCompat.NoActionBar</item>
+        <item name="android:actionBarStyle">@style/Theme.AppCompat.NoActionBar</item>
     </style>
 
     <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
         <item name="android:background">@color/colorBlackOverlay</item>
     </style>
-    
+
     <style name="BaseFont" parent="android:style/TextAppearance.Medium">
         <item name="android:fontFamily">@font/main_font</item>
         <item name="android:textColor">@android:color/black</item>

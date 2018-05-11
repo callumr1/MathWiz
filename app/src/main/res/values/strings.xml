@@ -24,4 +24,14 @@
     <string name="sounds">Sounds</string>
     <string name="background_music">Background Music</string>
     <string name="sound_effects">Sound Effects</string>
+
+    <string name="title_activity_game_fullscreen">GameActivityFullscreen</string>
+
+    <string name="title_activity_game_over">GameOverActivity</string>
+
+    <string name="title_activity_high_score">HighScoreActivity</string>
+
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <string name="title_activity_twitter">TwitterActivity</string>
 </resources>

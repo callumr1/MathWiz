@@ -1,106 +1,114 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:theme="@style/AppTheme"
+    android:id="@+id/fullscreen_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_vertical"
     android:background="@drawable/background"
-    tools:context="com.example.mathwiz.GameActivity">
+    tools:context="com.example.mathwiz.GameOverActivity">
 
     <LinearLayout
+        android:id="@+id/fullscreen_content_controls"
+        style="?metaButtonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="5"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingBottom="50sp">
-
-        <TextView
-            android:id="@+id/gameOverTitle"
-            style="@style/TitleFont"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingBottom="10sp"
-            android:text="@string/game_over"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textSize="90sp" />
-
-        <TextView
-            android:id="@+id/gameOverText"
-            style="@style/MainFont"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/you_scored"
-            android:textAlignment="center"
-            android:textAllCaps="false" />
-
-        <TextView
-            android:id="@+id/gameOverScore"
-            style="@style/HighlightFont"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Score"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textSize="50sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="10"
         android:layout_gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
-        <Button
-            android:id="@+id/returnButton"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/main_font"
-            android:includeFontPadding="true"
-            android:onClick="returnToHomeScreen"
-            android:text="@string/home"
-            android:textAllCaps="false"
-            android:textColor="@android:color/black"
-            android:textSize="30sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="50sp">
 
-        <Button
-            android:id="@+id/playAgainButton"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/main_font"
-            android:includeFontPadding="true"
-            android:onClick="startGameAgain"
-            android:text="@string/play_again"
-            android:textAllCaps="false"
-            android:textColor="@android:color/black"
-            android:textSize="30sp" />
+            <TextView
+                android:id="@+id/gameOverTitle"
+                style="@style/TitleFont"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingBottom="10sp"
+                android:text="@string/game_over"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textSize="90sp" />
 
-        <Button
-            android:id="@+id/twitterButton"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/main_font"
-            android:includeFontPadding="true"
+            <TextView
+                android:id="@+id/gameOverText"
+                style="@style/MainFont"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/you_scored"
+                android:textAlignment="center"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:id="@+id/gameOverScore"
+                style="@style/HighlightFont"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Score"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textSize="50sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:onClick="authorise"
-            android:text="@string/post_score_to_twitter"
-            android:textAllCaps="false"
-            android:textColor="@android:color/black"
-            android:textSize="30sp" />
+            android:layout_weight="10"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/homeButton"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="true"
+                android:onClick="returnToHomeScreen"
+                android:text="@string/home"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/playAgainButton"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="true"
+                android:onClick="startGameAgain"
+                android:text="@string/play_again"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/twitterButton"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="true"
+                android:onClick="authorise"
+                android:text="@string/post_score_to_twitter"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:textSize="30sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</FrameLayout>

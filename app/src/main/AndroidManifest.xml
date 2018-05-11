@@ -22,11 +22,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GameActivity" />
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".HighScoreActivity" />
-        <activity android:name=".GameOverActivity" />
-        <activity android:name=".TwitterActivity"></activity>
+        <activity
+            android:name=".GameActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_game_fullscreen"
+            android:theme="@style/FullscreenTheme" />
+        <activity
+            android:name=".GameOverActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_game_over"
+            android:theme="@style/FullscreenTheme" />
+        <activity
+            android:name=".HighScoreActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_high_score"
+            android:theme="@style/FullscreenTheme" />
+        <activity
+            android:name=".SettingsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_settings"
+            android:theme="@style/FullscreenTheme" />
+        <activity
+            android:name=".TwitterActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_twitter"
+            android:theme="@style/FullscreenTheme"></activity>
     </application>
 
 </manifest>

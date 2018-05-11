@@ -1,154 +1,162 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:theme="@style/AppTheme"
+    android:id="@+id/fullscreen_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/background"
     tools:context="com.example.mathwiz.GameActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:background="@color/colorBlackOverlay">
-
-        <TextView
-            android:id="@+id/timeText"
-            style="@style/MainFont"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:gravity="center"
-            android:text="Time"
-            android:textColor="@color/colorAccent" />
-
-        <TextView
-            android:id="@+id/scoreTitleText"
-            style="@style/MainFont"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:text="Score:"
-            android:textAlignment="textEnd"
-            android:textColor="@color/colorAccent" />
-
-        <TextView
-            android:id="@+id/scoreText"
-            style="@style/MainFont"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:text="0"
-            android:textAlignment="viewStart"
-            android:paddingLeft="5sp"
-            android:textColor="@color/colorAccent" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/tipText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/TipFont"
-        android:text="@string/tip"
-        android:textAlignment="center" />
-
-    <LinearLayout
+        android:id="@+id/fullscreen_content_controls"
+        style="?metaButtonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="9">
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
-        <TextView
-            android:id="@+id/questionText"
-            style="@style/TitleFont"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Question"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textSize="90sp" />
+            android:background="@color/colorBlackOverlay"
+            android:gravity="center">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/timeText"
+                style="@style/MainFont"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="Time"
+                android:textColor="@color/colorAccent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="bottom|center_horizontal"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingBottom="10dp">
+            <TextView
+                android:id="@+id/scoreTitleText"
+                style="@style/MainFont"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="Score:"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/scoreText"
+                style="@style/MainFont"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:paddingLeft="5sp"
+                android:text="0"
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorAccent" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tipText"
+            style="@style/TipFont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tip"
+            android:textAlignment="center" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_weight="9">
 
-            <Button
-                android:id="@+id/answerButton1"
-                style="@style/Widget.AppCompat.Button.Colored"
+            <TextView
+                android:id="@+id/questionText"
+                style="@style/TitleFont"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:fontFamily="@font/main_font"
-                android:includeFontPadding="false"
-                android:text="Answer 1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Question"
+                android:textAlignment="center"
                 android:textAllCaps="false"
-                android:textColor="@android:color/black"
-                android:textSize="50sp"
-                android:visibility="visible" />
-
-            <Button
-                android:id="@+id/answerButton2"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:fontFamily="@font/main_font"
-                android:includeFontPadding="false"
-                android:text="Answer 2"
-                android:textAllCaps="false"
-                android:textColor="@android:color/black"
-                android:textSize="50sp" />
+                android:textSize="90sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
 
-            <Button
-                android:id="@+id/answerButton3"
-                style="@style/Widget.AppCompat.Button.Colored"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:fontFamily="@font/main_font"
-                android:includeFontPadding="false"
-                android:text="Answer 3"
-                android:textAllCaps="false"
-                android:textColor="@android:color/black"
-                android:textSize="50sp" />
+                android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/answerButton4"
-                style="@style/Widget.AppCompat.Button.Colored"
+                <Button
+                    android:id="@+id/answerButton1"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/main_font"
+                    android:includeFontPadding="false"
+                    android:text="Answer 1"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/black"
+                    android:textSize="50sp"
+                    android:visibility="visible" />
+
+                <Button
+                    android:id="@+id/answerButton2"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/main_font"
+                    android:includeFontPadding="false"
+                    android:text="Answer 2"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/black"
+                    android:textSize="50sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:fontFamily="@font/main_font"
-                android:includeFontPadding="false"
-                android:text="Answer 4"
-                android:textAllCaps="false"
-                android:textColor="@android:color/black"
-                android:textSize="50sp" />
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/answerButton3"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/main_font"
+                    android:includeFontPadding="false"
+                    android:text="Answer 3"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/black"
+                    android:textSize="50sp" />
+
+                <Button
+                    android:id="@+id/answerButton4"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/main_font"
+                    android:includeFontPadding="false"
+                    android:text="Answer 4"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/black"
+                    android:textSize="50sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</FrameLayout>
