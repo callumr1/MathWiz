@@ -1,7 +1,12 @@
 package com.example.mathwiz;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.Looper;
@@ -108,6 +113,37 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private SoundManager soundManager;
     private MediaPlayer mediaPlayer;
 
+    // variables for shake detection
+    private SensorManager sensorManager;
+    private static final int SHAKE_THRESHOLD = 50;
+    private static final int TIME_BETWEEN_SHAKES = 1000; // in milliseconds
+    private long lastShakeTime; // last time the device was shaken
+    private final SensorEventListener sensorEventListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            long currentTime = System.currentTimeMillis();
+            if ((currentTime - lastShakeTime) > TIME_BETWEEN_SHAKES) {
+                float x = event.values[0];
+                float y = event.values[1];
+                float z = event.values[2];
+
+                double acceleration = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2)) - SensorManager.GRAVITY_EARTH;
+
+                if(acceleration > SHAKE_THRESHOLD){
+                    // when the device is shaken, it "skips" that question and generates a new one
+                    setQuestion();
+                    lastShakeTime = currentTime;
+                    System.out.println("Shaking");
+                }
+            }
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -188,6 +224,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 }.start();
             }
         });
+
+        // Handles the SensorManager for when the user shakes the device
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        sensorManager.registerListener(sensorEventListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
@@ -212,16 +252,21 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
+        // starts listening for shaking
+        sensorManager.registerListener(sensorEventListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
 
         if(playBackgroundMusic){
             // Stop playing the background music
             Background.stopBackgroundMusic(this);
         }
+
+        // stop listening for shaking
+        sensorManager.unregisterListener(sensorEventListener);
     }
 
     private void setQuestion() {

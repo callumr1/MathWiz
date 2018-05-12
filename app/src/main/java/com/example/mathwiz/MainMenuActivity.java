@@ -85,7 +85,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     private Button highScoreButton;
     private Button twitterButton;
 
-    // create an action bar button
+    // creates the action bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
