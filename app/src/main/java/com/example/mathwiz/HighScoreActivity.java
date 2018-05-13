@@ -1,6 +1,7 @@
 package com.example.mathwiz;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.CalendarContract;
@@ -11,6 +12,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -115,6 +117,27 @@ public class HighScoreActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.action_settings:
+                // User chose the settings item, show the settings activity
+                startSettingsActivity();
+                return true;
+            case R.id.action_highscores:
+                // User chose the highscores item, show the highscores activity
+                startHighScoreActivity();
+                return true;
+            case R.id.action_playagain:
+                // User chose the playagain item, sow the game activity
+                startGameActivity();
+                return true;
+            default:
+                // The users action was not recognized
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -215,6 +238,9 @@ public class HighScoreActivity extends AppCompatActivity {
         }
         mVisible = false;
 
+        // Makes it so that the game content fills the screen when ui is hidden
+        mContentView.setFitsSystemWindows(false);
+
         // Schedule a runnable to remove the status and navigation bar after a delay
         mHideHandler.removeCallbacks(mShowPart2Runnable);
         mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
@@ -227,6 +253,9 @@ public class HighScoreActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
         mVisible = true;
 
+        // Makes it so that the action bar does not cover game content
+        mContentView.setFitsSystemWindows(true);
+
         // Schedule a runnable to display UI elements after a delay
         mHideHandler.removeCallbacks(mHidePart2Runnable);
         mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
@@ -237,7 +266,25 @@ public class HighScoreActivity extends AppCompatActivity {
      * previously scheduled calls.
      */
     private void delayedHide(int delayMillis) {
+        // Makes it so that the game content fills the screen when ui is hidden
+        mContentView.setFitsSystemWindows(false);
+
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
+    }
+
+    public void startHighScoreActivity() {
+        Intent intent = new Intent(this, HighScoreActivity.class);
+        startActivity(intent);
+    }
+
+    public void startSettingsActivity() {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    public void startGameActivity() {
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
     }
 }

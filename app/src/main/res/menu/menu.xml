@@ -10,4 +10,8 @@
         android:title="@string/high_scores"
         app:showAsAction="never"/>
 
+    <item android:id="@+id/action_playagain"
+        android:title="@string/play_again"
+        app:showAsAction="never"/>
+
 </menu>

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -109,6 +110,27 @@ public class GameOverActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.action_settings:
+                // User chose the settings item, show the settings activity
+                startSettingsActivity();
+                return true;
+            case R.id.action_highscores:
+                // User chose the highscores item, show the highscores activity
+                startHighScoreActivity();
+                return true;
+            case R.id.action_playagain:
+                // User chose the playagain item, sow the game activity
+                startGameActivity();
+                return true;
+            default:
+                // The users action was not recognized
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -258,10 +280,25 @@ public class GameOverActivity extends AppCompatActivity {
      * previously scheduled calls.
      */
     private void delayedHide(int delayMillis) {
-        mHideHandler.removeCallbacks(mHideRunnable);
-        mHideHandler.postDelayed(mHideRunnable, delayMillis);
-
         // Makes it so that the game content fills the screen when ui is hidden
         mContentView.setFitsSystemWindows(false);
+
+        mHideHandler.removeCallbacks(mHideRunnable);
+        mHideHandler.postDelayed(mHideRunnable, delayMillis);
+    }
+
+    public void startHighScoreActivity() {
+        Intent intent = new Intent(this, HighScoreActivity.class);
+        startActivity(intent);
+    }
+
+    public void startSettingsActivity() {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    public void startGameActivity() {
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
     }
 }
