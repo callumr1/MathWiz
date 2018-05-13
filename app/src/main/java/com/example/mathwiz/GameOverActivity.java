@@ -2,10 +2,12 @@ package com.example.mathwiz;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.DatabaseErrorHandler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -98,8 +100,16 @@ public class GameOverActivity extends AppCompatActivity {
     private TextView gameScore;
     private String scoreText;
     private int score;
+    DatabaseHelper databaseHelper;
 
     Twitter twitter = TwitterFactory.getSingleton();
+
+    // creates the action bar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,9 +124,14 @@ public class GameOverActivity extends AppCompatActivity {
         score = getIntent().getExtras().getInt("final score", 0);
         twitterButton = findViewById(R.id.twitterButton);
         gameScore = findViewById(R.id.gameOverScore);
-        scoreText = String.valueOf(score) + " points";
+        String scoreString = String.valueOf(score);
+        scoreText = scoreString + " points";
         gameScore.setText(scoreText);
+        databaseHelper = new DatabaseHelper(this);
 
+        // Add the players score to the database
+        System.out.println(scoreString);
+        AddData(scoreString);
 
         // Set up the user interaction to manually show or hide the system UI.
         mContentView.setOnClickListener(new View.OnClickListener() {
@@ -130,6 +145,16 @@ public class GameOverActivity extends AppCompatActivity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.twitterButton).setOnTouchListener(mDelayHideTouchListener);
+    }
+
+    public void AddData(String newEntry){
+        boolean insertData = databaseHelper.addData(newEntry);
+
+        if(insertData){
+            System.out.println("Added Data Successfully");
+        }else{
+            System.out.println("Something went wrong");
+        }
     }
 
     public void authorise(View view){

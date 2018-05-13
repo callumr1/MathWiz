@@ -14,6 +14,45 @@
         android:orientation="vertical"
         tools:ignore="UselessParent">
 
+        <TextView
+            android:id="@+id/settingsTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/highscores"
+            style="@style/TitleFont"
+            android:textAlignment="center"
+            android:textAllCaps="false" />
+
+        <ListView
+            android:id="@+id/highScoresList"
+            android:layout_width="match_parent"
+            android:layout_weight="10"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBlackOverlay"
+            android:divider="@color/colorPrimaryDark"
+            android:dividerHeight="1dp">
+
+        </ListView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/main_font"
+                android:onClick="clearHighScores"
+                android:text="Clear High Scores"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:textSize="25sp" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </FrameLayout>

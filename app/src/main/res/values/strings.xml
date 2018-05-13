@@ -34,4 +34,5 @@
     <string name="title_activity_settings">SettingsActivity</string>
 
     <string name="title_activity_twitter">TwitterActivity</string>
+    <string name="highscores">HighScores</string>
 </resources>

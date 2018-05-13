@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebView;
@@ -92,6 +93,13 @@ public class TwitterActivity extends AppCompatActivity {
 
     WebView webView;
     Twitter twitter = TwitterFactory.getSingleton();
+
+    // creates the action bar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

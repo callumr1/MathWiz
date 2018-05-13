@@ -1,12 +1,26 @@
 package com.example.mathwiz;
 
 import android.annotation.SuppressLint;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.provider.CalendarContract;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -83,6 +97,23 @@ public class HighScoreActivity extends AppCompatActivity {
         }
     };
 
+    private ArrayList<String> scoresList = new ArrayList<>();
+    private ArrayAdapter<String> adapter;
+    private Cursor cursor;
+    private String scoreText;
+    private ListView highScoresListView;
+
+    private static final String TAG = "HighScoreActivity";
+
+    DatabaseHelper databaseHelper;
+
+    // creates the action bar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +123,13 @@ public class HighScoreActivity extends AppCompatActivity {
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
+        //highScoresDB = new HighScoresDB(this);
+        highScoresListView = findViewById(R.id.highScoresList);
+        highScoresListView.setAdapter(adapter);
+
+        databaseHelper = new DatabaseHelper(this);
+        // populate the list view with all of the highscores
+        populateHighScores();
 
 
         // Set up the user interaction to manually show or hide the system UI.
@@ -105,6 +143,50 @@ public class HighScoreActivity extends AppCompatActivity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
+    }
+
+    private void populateHighScores() {
+        Log.d(TAG, "populateHighScores: Displaying data in the ListView.");
+
+        // get the data and then append to the highscores list
+        Cursor data = databaseHelper.getData();
+        // iterates through each row
+        if(data != null && data.getCount() > 0){
+            while (data.moveToNext()){
+                // get the value from the database in column 1
+                // then add it to the ArrayList
+                scoresList.add(data.getString(0));
+            }
+            Collections.sort(scoresList);
+            // set the adapter
+            adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, scoresList){
+                @Override
+                public View getView(int poition, View converView, ViewGroup parent){
+                    // Get the item from ListView
+                    View view = super.getView(poition, converView, parent);
+
+                    // Initialise a TextView for each ListView Item
+                    TextView textView = view.findViewById(android.R.id.text1);
+
+                    // Set the text colour of each TextView
+                    textView.setTextColor(getResources().getColor(R.color.colorAccentDark));
+                    textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
+                    // Generate ListView Item using the TextView
+                    return view;
+                }
+
+            };
+            highScoresListView.setAdapter(adapter);
+
+        }
+    }
+
+    public void clearHighScores(View view){
+        // delete all of the high scores from the database
+        Log.d(TAG, "clearHighScores: Deleting all entries in the database");
+
+        databaseHelper.deleteAll();
     }
 
     @Override

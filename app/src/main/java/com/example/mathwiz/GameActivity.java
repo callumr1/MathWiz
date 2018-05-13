@@ -14,6 +14,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -143,6 +144,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     };
+
+    // creates the action bar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -303,7 +311,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         try {
             // randomise which button displays that actual answer
             Random random = new Random();
-            int n = random.nextInt(3);
+            int n = random.nextInt(4);
             // creates random false answers
             int n1 = answer + ((1 + num2) * 2);
             int n2 = answer + (1 + num1);
@@ -339,7 +347,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 answerButton1.setText(String.valueOf(n1));
                 answerButton2.setText(String.valueOf(n2));
                 answerButton4.setText(String.valueOf(n3));
-            } else if (n == 4) {
+            } else if (n == 3) {
                 answerButton4.setText(String.valueOf(answer));
                 correctButton = String.valueOf(answerButton4.getId());
 

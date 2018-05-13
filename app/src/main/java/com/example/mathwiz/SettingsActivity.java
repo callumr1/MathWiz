@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -85,6 +86,13 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     public int gameDifficulty;
     private Button easyButton, mediumButton, hardButton;
     private ToggleButton musicToggle, soundEffectsToggle;
+
+    // creates the action bar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
