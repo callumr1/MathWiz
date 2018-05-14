@@ -99,7 +99,8 @@ public class HighScoreActivity extends AppCompatActivity {
         }
     };
 
-    private ArrayList<String> scoresList = new ArrayList<>();
+    private ArrayList<Integer> scoresList = new ArrayList<>();
+    private ArrayList<String> scoresStringList = new ArrayList<>();
     private ArrayAdapter<String> adapter;
     private Cursor cursor;
     private String scoreText;
@@ -178,11 +179,18 @@ public class HighScoreActivity extends AppCompatActivity {
             while (data.moveToNext()){
                 // get the value from the database in column 1
                 // then add it to the ArrayList
-                scoresList.add(data.getString(0));
+                scoresList.add(data.getInt(0));
             }
+            // sorts the list of high scores so that they are highest to lowest
             Collections.sort(scoresList);
+            Collections.reverse(scoresList);
+
+            for(int x : scoresList){
+                String y = String.valueOf(x);
+                scoresStringList.add(y);
+            }
             // set the adapter
-            adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, scoresList){
+            adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, scoresStringList){
                 @Override
                 public View getView(int poition, View converView, ViewGroup parent){
                     // Get the item from ListView

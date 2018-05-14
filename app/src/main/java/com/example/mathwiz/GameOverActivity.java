@@ -153,7 +153,7 @@ public class GameOverActivity extends AppCompatActivity {
 
         // Add the players score to the database
         System.out.println(scoreString);
-        AddData(scoreString);
+        AddData(score);
 
         // Set up the user interaction to manually show or hide the system UI.
         mContentView.setOnClickListener(new View.OnClickListener() {
@@ -169,7 +169,7 @@ public class GameOverActivity extends AppCompatActivity {
         findViewById(R.id.twitterButton).setOnTouchListener(mDelayHideTouchListener);
     }
 
-    public void AddData(String newEntry){
+    public void AddData(int newEntry){
         boolean insertData = databaseHelper.addData(newEntry);
 
         if(insertData){
