@@ -339,9 +339,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             int n2 = answer + (1 + num1);
             int n3 = answer - (1 + num2);
 
-            if (n1 == n || n2 == n || n3 == n){
+            // make sure there are no duplicate answer buttons
+            if (n1 == answer || n1 == n2 || n1 == n3) {
                 n1 += 1;
+            } else if (n2 == answer || n2 == n3) {
                 n2 += 1;
+            }else if (n3 == answer) {
                 n3 += 1;
             }
 

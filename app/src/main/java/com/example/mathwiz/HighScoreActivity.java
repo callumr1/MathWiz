@@ -179,7 +179,7 @@ public class HighScoreActivity extends AppCompatActivity {
             while (data.moveToNext()){
                 // get the value from the database in column 1
                 // then add it to the ArrayList
-                scoresList.add(data.getInt(0));
+                scoresList.add(data.getInt(1));
             }
             // sorts the list of high scores so that they are highest to lowest
             Collections.sort(scoresList);
