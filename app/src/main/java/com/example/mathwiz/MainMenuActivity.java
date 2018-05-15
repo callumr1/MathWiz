@@ -84,7 +84,6 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     private Button settingsButton;
     private Button playButton;
     private Button highScoreButton;
-    private Button twitterButton;
 
     // creates the action bar
     @Override
@@ -140,12 +139,10 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         playButton = findViewById(R.id.playButton);
         settingsButton = findViewById(R.id.settingsButton);
         highScoreButton = findViewById(R.id.highScoreButton);
-        twitterButton = findViewById(R.id.twitterButton);
 
         playButton.setOnClickListener(this);
         settingsButton.setOnClickListener(this);
         highScoreButton.setOnClickListener(this);
-        twitterButton.setOnClickListener(this);
     }
 
     @Override
@@ -213,11 +210,6 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         // changes to the high scores activity
         else if (view.getId() == R.id.highScoreButton){
             startHighScoreActivity();
-        }
-        else if (view.getId() == R.id.twitterButton){
-            Intent intent = new Intent(this, GameOverActivity.class);
-            intent.putExtra("final score", 0);
-            startActivity(intent);
         }
     }
 
