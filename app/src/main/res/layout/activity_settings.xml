@@ -10,14 +10,15 @@
         android:id="@+id/fullscreen_content_controls"
         style="?metaButtonBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         tools:ignore="UselessParent">
 
         <TextView
             android:id="@+id/settingsTextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="2"
             android:text="@string/settings"
             style="@style/TitleFont"
             android:textAlignment="center"
@@ -25,7 +26,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="3"
             android:orientation="vertical"
             android:paddingBottom="10sp">
 
@@ -86,7 +88,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="4"
             android:orientation="vertical"
             android:paddingBottom="10sp">
 
