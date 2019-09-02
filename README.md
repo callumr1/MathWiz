@@ -5,5 +5,3 @@ Each question is created by randomly generating two numbers from 0 to X where X 
 Some of the features of the app include:
  - Convert a colour that the user entered
  - Support more colour types (e.g. CMYK)
-
-[MathWiz screenshots](https://imgur.com/a/bEj2o7u)
